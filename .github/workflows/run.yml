@@ -56,18 +56,6 @@ jobs:
           USER_AGENT_SECRET_2: ${{ secrets.USER_AGENT_SECRET_2 }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Install RAR
-        run: sudo apt-get install rar -y
-
-      - name: Archive login.json with Password
-        run: rar a -hp${{ secrets.RAR_PASSWORD }} login.rar login.json
-
-      - name: Upload login.rar Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: login-rar
-          path: login.rar
-
   workflow-keepalive:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
